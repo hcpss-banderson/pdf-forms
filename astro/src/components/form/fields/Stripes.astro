@@ -1,0 +1,14 @@
+---
+
+---
+<div class="stripes">
+  <slot />
+</div>
+<style>
+.stripes > :global(*) {
+  padding: 20px;
+}
+.stripes > :global(*:nth-child(odd)) {
+  background-color: #e7e7e7;
+}
+</style>

@@ -1,0 +1,105 @@
+---
+layout: ../layouts/FormLayout.astro
+form_id: '6401-000003'
+form_version: '1.0.0'
+title: 'Health Survey Form'
+subtitle: 'School Heath Services'
+poc:
+    name: 'Mary Caudle'
+    email: 'Mary_Caudle@hcpss.org'
+policy_references: ['5100', '9000']
+---
+import Callout from '../components/Callout.astro';
+import FormElement from '../components/FormElement.astro';
+import Grid from '../components/layout/grid/Grid.astro';
+import InputField from '../components/form/fields/InputField.astro';
+import InputFieldCell from '../components/form/fields/InputFieldCell.astro';
+import RadiosFieldCell from '../components/form/fields/RadiosFieldCell.astro';
+import Section from '../components/layout/Section.astro';
+import Heading from '../components/Heading.astro';
+import Stripes from '../components/form/fields/Stripes.astro';
+import YesNoListTable from '../components/form/fields/YesNoListTable.astro';
+import ReadonlySection from '../components/ReadonlySection.astro';
+import Cell from '../components/layout/grid/Cell.astro';
+import SchoolSelectFieldCell from '../components/form/fields/SchoolSelectFieldCell.astro';
+import GradeSelectFieldCell from '../components/form/fields/GradeSelectFieldCell.astro';
+
+<Callout>
+  Return to the Health Room at your child’s school.
+</Callout>
+
+<FormElement>
+  <Grid>
+    <InputFieldCell type="date" name="Today's Date" label="Date" grow={false} />
+    <InputFieldCell label="Child's Name" span={8} />
+    <InputFieldCell type="date" label="Date of Birth" span={4} />
+    <SchoolSelectFieldCell label="Entering School" grow={true} span={8} />
+    <GradeSelectFieldCell label="Entering Grade" grow={true} span={4} />
+    <InputFieldCell label="Last School Attended with City/State" />
+    <RadiosFieldCell label="Has Your Child Ever Attended a Maryland Public School?" options={["Yes", "No"]} />
+  </Grid>
+  <Section>
+    <Heading>Contact Information</Heading>
+    <Grid>
+      <InputFieldCell label="Name of Person giving information" span={8} />
+      <InputFieldCell label="Relationship" span={4} />
+      <InputFieldCell type="tel" name="Phone Number" label="What is the best phone number to reach you at while your student is at school?" />
+      <InputFieldCell type="email" name="Email Address" label="If you like to be contacted by email, please provide best email address" />
+      <InputFieldCell type="tel" name="Cell Phone Number" label="If you would like us to reach you by text, please provide cell phone number" />
+    </Grid>
+  </Section>
+  <Section>
+    <Heading>Medical Information</Heading>
+    <Grid>
+      <RadiosFieldCell label="Does the student have a physician?" options={["Yes", "No"]} />
+      <InputFieldCell name="Physician Name and Phone Number" label="Name and telephone number of physician" />
+      <RadiosFieldCell label="Do you need help finding a physician?" options={["Yes", "No"]} />
+      <InputFieldCell type="date" label="Date of last Physical Exam" span={6} />
+      <InputFieldCell type="date" label="Date of last Dental Exam" span={6} />
+      <InputFieldCell type="date" label="Date of last Vision Exam" span={6} />
+      <RadiosFieldCell label="Health Insurance Coverage?" options={["Yes", "No"]} span={6} />
+    </Grid>
+  </Section>
+  <Section>
+    <Heading>Health History</Heading>
+    <Grid>
+      <RadiosFieldCell
+        label="Will the student require medication to be given at school?"
+        help="if YES, a Medication Order Form must be completed for each prescription and over the counter medication to be given during school."
+        options={["Yes", "No"]} />
+      <InputFieldCell label="What medications are taken at home?" />
+    </Grid>
+  </Section>
+  <Section>
+    <Heading>Medical Concerns</Heading>
+    <Stripes>
+      <YesNoListTable label="Allergies" />
+      <YesNoListTable label="Is the NUT-FREE table required for this student?" showList={false} />
+      <YesNoListTable label="Medical Conditions" help="For example: ADHD, Diabetes, Seizures, Asthma, Cardiac, Blood Disorders, Cancer, etc." />
+      <YesNoListTable label="Hospitalizations or Operations" />
+      <YesNoListTable label="Physical Handicapping Conditions" />
+      <YesNoListTable label="Activity Restrictions" help="If yes, a Physical Education Activity Restriction form must be completed by a physician." showList={false} />
+      <YesNoListTable label="Assistive Devices" />
+      <YesNoListTable label="Mental Health Issues" />
+      <YesNoListTable label="Speech Difficulties/Developmental Delays" />
+      <YesNoListTable label="Vision Difficulties" help="For example: Wears Glasses or Contacts, Crossed Eyes, etc." showList={false} />
+      <YesNoListTable label="Hearing Difficulties" showList={false} />
+      <YesNoListTable label="Any Other Health Concerns" help="For example: eating/sleeping habits, posture, skin/teeth, weight, daytime wetting/stooling concerns, etc." />
+    </Stripes>
+  </Section>
+  <ReadonlySection>
+    <Heading>Health Room Use Only</Heading>
+    <Grid>
+      <Cell span={6}>
+        <Heading level={3}>Received</Heading>
+        <InputField type="date" label="Form Received Date" disabled={true} />
+        <InputField name="Form Received Signature" label="Signature" disabled={true} />
+      </Cell>
+      <Cell span={6}>
+        <Heading level={3}>Reviewed</Heading>
+        <InputField type="date" label="Form Reviewed Date" disabled={true} />
+        <InputField type="date" name="Form Reviewed Signature" label="Signature" disabled={true} />
+      </Cell>
+    </Grid>
+  </ReadonlySection>
+</FormElement>

@@ -1,0 +1,40 @@
+---
+import Cell from "../../layout/grid/Cell.astro";
+import RadiosField from "./RadiosField.astro";
+interface Props {
+  name?: string,
+  help?: string,
+  label: string,
+  labelDisplay?: string,
+  options?: string[],
+  span?: number,
+  align?: string,
+  required?: boolean,
+}
+const {
+  required = false,
+  help = '',
+  labelDisplay = 'inline',
+  name = '',
+  span = 12,
+  align = 'left',
+  label = 'NOLABEL???',
+  options = ['Yes', 'No'],
+} = Astro.props
+---
+<Cell :span="span" :align="align">
+  <RadiosField
+    name={name}
+    label={label}
+    options={options}
+    labelDisplay={labelDisplay}
+    required={required} />
+</Cell>
+<style>
+fieldset {
+  display: inline;
+}
+fieldset > * {
+  display: inline;
+}
+</style>

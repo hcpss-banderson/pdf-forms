@@ -1,0 +1,42 @@
+---
+import Cell from "../../layout/grid/Cell.astro";
+import InputField from "./InputField.astro";
+interface Props {
+  name?: string,
+  required?: boolean,
+  help?: string,
+  label: string,
+  labelDisplay?: string,
+  type?: string,
+  grow?: boolean,
+  disabled?: boolean,
+  id?: string,
+  span?: number,
+  align?: string
+}
+const {
+  required = false,
+  help = '',
+  labelDisplay = 'inline',
+  type = "text",
+  grow = true,
+  disabled = false,
+  name = '',
+  id = '',
+  span = 12,
+  align = 'left',
+  label
+} = Astro.props
+---
+  <Cell span={span} align={align}>
+    <InputField
+        id={id}
+        help={help}
+        required={required}
+        name={name}
+        label={label}
+        labelDisplay={labelDisplay}
+        type={type}
+        grow={grow}
+        disabled={disabled} />
+  </Cell>

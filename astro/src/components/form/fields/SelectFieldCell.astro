@@ -1,0 +1,35 @@
+---
+import Cell from "../../layout/grid/Cell.astro";
+import SelectField from "./SelectField.astro";
+interface Props {
+  name?: string,
+  required?: boolean,
+  help?: string,
+  label: string,
+  labelDisplay?: string,
+  options: string[],
+  grow?: boolean,
+  span?: number,
+  align?: string,
+}
+const {
+  required = false,
+  help = '',
+  labelDisplay = 'inline',
+  grow = false,
+  name = '',
+  span = 12,
+  align = 'left',
+  label = 'NOLABEL???',
+  options = []
+} = Astro.props
+---
+<Cell span={span} align={align}>
+  <SelectField
+      name={name}
+      label={label}
+      options={options}
+      grow={grow}
+      labelDisplay={labelDisplay}
+      required={required} />
+</Cell>

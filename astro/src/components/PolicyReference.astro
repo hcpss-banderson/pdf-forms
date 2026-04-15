@@ -1,0 +1,15 @@
+---
+import policyUrl from "../../utils/policyUrl.ts";
+interface Props {
+    policies: string[]
+}
+const { policies = [] } = Astro.props;
+---
+{policies.length > 0 && (
+    <p>
+        Related policies:
+        {policies.map((policy, i) => (
+            <span>{(i !== 0) && ', '}<a href={policyUrl(policy)}>{policy}</a></span>
+        ))}
+    </p>
+)}

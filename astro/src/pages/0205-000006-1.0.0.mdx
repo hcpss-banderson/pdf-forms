@@ -1,0 +1,70 @@
+---
+layout: ../layouts/FormLayout.astro
+form_id: '0205-000006'
+form_version: '1.0.0'
+title: 'Single Source Justification'
+subtitle: ''
+poc:
+    name: 'Robert Bruce'
+    email: 'robert_bruce1@hcpss.org'
+policy_references: ['4050']
+---
+import FormElement from '../components/FormElement.astro';
+import Grid from '../components/layout/grid/Grid.astro';
+import InputFieldCell from '../components/form/fields/InputFieldCell.astro';
+import TextAreaField from '../components/form/fields/TextAreaField.astro';
+import Cell from '../components/layout/grid/Cell.astro';
+
+## Purpose
+
+Single source justification provides evidence that a competitive procurement is
+impractical. Staff must request approval for the single source procurement of
+equipment, construction, supplies or services for any amount. All purchases
+require Board of Education approval. This completed form will be provided to the
+Board for approval of your request. This form is not to be utilized to
+circumvent normal purchasing procedures. Approval is **not** needed when
+utilizing approved contracts (i.e. HCPSS, County, State, etc.). Single Source
+Contracts are limited to a 12 months term
+
+## Guidelines
+
+Per Board of Education Policy #4050, the awarding of a single source contract
+shall comply with the following conditions:
+
+1. A procurement of goods and/or services entered in which two or more vendors
+   can supply the commodity, technology and/or perform the services required,
+   but one vendor is chosen over the others because of past and demonstrated
+   experience and/or uniqueness of the services or goods provided
+
+Acceptance of this request will be at the discretion of the Director of
+Purchasing.
+
+## Statement
+
+I am aware that Board of Education of Howard County and State of Maryland
+regulations require competitive procurements whenever practicable. I am
+requesting a single source procurement based on the criteria stated below. These
+statements are complete and accurate based on my professional judgment and
+investigations. I also certify that no personal advantage, gain or privilege has
+(or will) accrue to my immediate family or myself through the purchase from this
+company, nor is a family member employed by, or is an officer of this company.
+
+<FormElement>
+    <Grid>
+        <InputFieldCell label="Account Manager" span={6} />
+        <InputFieldCell label="Account Manager Signature" span={6} />
+        <InputFieldCell label="Date" type="date" span={6} />
+        <InputFieldCell label="Phone" type="tel" span={6} />
+        <InputFieldCell label="Name of Company" span={6} />
+        <InputFieldCell label="Amount/value" id="amount" name="amount" span={6} />
+        <Cell>
+            <TextAreaField name="servicesRequested" id="servicesRequested" label="Briefly describe the equipment, construction, supplies or services requested, and its purpose or use:" />
+        </Cell>
+        <Cell>
+            <TextAreaField name="risks" id="risks" label="What are the consequences or risks of not securing this equipment, construction, supplies or services from this company?" />
+        </Cell>
+        <Cell>
+            <TextAreaField name="info" id="info" label="Please provide information that supports your specific requirements necessitating a sole source purchase:" />
+        </Cell>
+    </Grid>
+</FormElement>

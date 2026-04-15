@@ -1,0 +1,110 @@
+---
+layout: ../layouts/FormLayout.astro
+form_id: "0205-000007"
+form_version: '1.0.0'
+title: ' Cooperative\Piggyback Purchasing Checklist'
+subtitle: ''
+poc:
+    name: 'Robert Bruce'
+    email: 'robert_bruce1@hcpss.org'
+policy_references: []
+---
+import Callout from "../components/Callout.astro";
+import FormElement from "../components/FormElement.astro";
+import Heading from "../components/Heading.astro";
+import InputField from "../components/form/fields/InputField.astro";
+import InputFieldCell from "../components/form/fields/InputFieldCell.astro";
+import RadiosField from "../components/form/fields/RadiosField.astro";
+import Section from "../components/layout/Section.astro";
+import Stripes from "../components/form/fields/Stripes.astro";
+import Grid from "../components/layout/grid/Grid.astro";
+import TextAreaField from "../components/form/fields/TextAreaField.astro";
+import Cell from "../components/layout/grid/Cell.astro";
+
+<Callout>
+    Use this checklist to determine If on awarded contract meets the
+    requirements to 'piggyback'.
+</Callout>
+
+<FormElement>
+    <InputField label="Solicitation Title" />
+    <Heading>Does the Solicitation Meet the Following Requirements?</Heading>
+    <Stripes>
+        <RadiosField align="right" name="authority" label="Do we have the authority to bid/contract for the item or service?" />
+        <RadiosField align="right" name="public" label="Is it solicited by a public or non-profit agency? City, County, State,School District, Port, non-profit, or Co-Op established for this purpose?" />
+        <RadiosField align="right" name="consistent" label="Was the solicitation conducted and awarded using a process consistent to HCPSS Procurement Policies?" help="Does this meet our solicitation requirement for quotes or sealed process? Check what our dollar threshold process requires." />
+        <RadiosField align="right" name="language" label="Does the solicitation and/or contract contain the language to piggyback?" />
+        <RadiosField align="right" name="icpa" label="Verify the ICPA solicitation was competitively bid and publicly advertised." />
+        <RadiosField align="right" name="rfp_ifp" label="Was the contract awarded consistent with the RFP/IFB instructions?" help="Review the bid tabs or evaluation summary and award recommendations." />
+        <RadiosField align="right" name="agreedToAllow" label="Has the awarded vendor agreed to allow piggybacks? May be included in the contract, may be referenced back to the solicitation document." />
+        <RadiosField align="right" name="inEffect" label="Is the solicitation/contract still in effect? If it has renewals, do we have a copy of the valid renewal agreement?" />
+        <RadiosField align="right" name="debarment" label="Check the State and Federal debarment list. Is the vendor listed? Have we obtain originating agency's competitive procurement documentation?" help="Including public advertisements and proposal evaluations" />
+    </Stripes>
+    <Section>
+        <RadiosField align="right" name="reviewed" label="I have reviewed the items on the above checklist for this solicitation and" options={['meets the requirements', 'does not meet the requirements']} />
+    </Section>
+    <Section>
+        <Grid>
+            <InputFieldCell label="Requestor" span={8} />
+            <InputFieldCell label="Date" span={4} />
+            <InputFieldCell label="Procurement Specialist" span={8} />
+            <InputFieldCell label="Date" span={4} />
+        </Grid>
+    </Section>
+    <Section>
+        <Heading>STEP 1-To be Completed by the Requestor</Heading>
+        <Grid>
+            <InputFieldCell label="Requesting Office" />
+            <InputFieldCell label="Contact Name" />
+            <InputFieldCell label="Phone" span={6} />
+            <InputFieldCell label="Email" span={6} />
+            <hr />
+            <InputFieldCell label="Cooperative Procurement Agency/Organization" />
+            <InputFieldCell label="Contact Name" />
+            <InputFieldCell label="Phone" span={6} />
+            <InputFieldCell label="Email" span={6} />
+            <hr />
+            <InputFieldCell label="Vendor Name" />
+            <InputFieldCell label="Contact Name" />
+            <InputFieldCell label="Phone" span={6} />
+            <InputFieldCell label="Email" span={6} />
+            <hr />
+            <InputFieldCell label="Procurement Method:" />
+            <InputFieldCell label="Contract Term" span={6} />
+            <InputFieldCell label="Available Options" span={6} />
+            <Cell>
+                <TextAreaField label="Purchase Description" />
+            </Cell>
+            <Cell>
+                <TextAreaField label="Economic Justification" help="A cooperative review request from a program must inctude s verifiable economic justification to why using a cooperative purchasing agreement is more cost effective or likely to realize savings than conducting a sollcitation." />
+            </Cell>
+        </Grid>
+    </Section>
+    <Section>
+        <Heading>STEP 2-To be Completed by the Procurement Specialist</Heading>
+        <Stripes>
+            <RadiosField align="right" name="adv_90_days" label="Was the solicitation advertised to the public preceding the date of bid or proposal opening for no less than 5 days and no more than 90 days?" />
+            <RadiosField align="right" name="des_time_place" label="Were sealed bids or proposals opened at a designated time and place?" />
+            <RadiosField align="right" name="witness" label="Was there a witness to the opening?" />
+            <RadiosField align="right" name="ifb_names_recorded" label="(IFB ONLY) Were the names of bidders and amount of their bids recorded?" />
+            <RadiosField align="right" name="ifb_names_communicated" label="(IFB ONLY) Were the names of the bidders and the amount of their bids communicated or made available to the public in some manner?" />
+            <RadiosField align="right" name="ifb_responsive" label="(IFB ONLY) Was the award made to the responsive and responsible bidder who has submitted the lowest bid that met the requirements and criteria set forth in the bid?" />
+            <RadiosField align="right" name="rfp_evaluated" label="(RFP ONLY) Were all proposals evaluated based on established Evaluation and Selection Criteria set forth in the solicitation?" />
+            <RadiosField align="right" name="rfb_protests" label="(RFP ONLY) Were protests allowed as part of the process?" />
+            <RadiosField align="right" name="both_secure" label="(Both) If the solicitation was sealed, were all bids/proposals kept secure and unopened until the date and time specified in the solicitation?" />
+        </Stripes>
+    </Section>
+    <Section>
+        <Heading>Step 3 - To be Completed the Director of Procurement and Materials Management</Heading>
+        <Grid>
+            <Cell>
+                <RadiosField inlineOptions={false} label="Outcome" labelDisplay="hidden" options={{'approved': 'Approved: The cooperative procurement agreement referenced above has been determined to substantially meet the requirements of Maryland procurement law.', 'denied': 'Denied: The cooperative procurement agreement referenced above has been determined not to substantially meet the requirements of Maryland procurement law.'}} />
+            </Cell>
+            <Cell>
+                <TextAreaField label="Additional justification, if any" />
+            </Cell>
+            <InputFieldCell label="Director of Procurement and Materials Management" span={8} />
+            <InputFieldCell label="Date" span={4} />
+        </Grid>
+    </Section>
+</FormElement>

@@ -1,0 +1,25 @@
+---
+const { frontmatter } = Astro.props;
+import policyUrl from "../../utils/policyUrl.ts";
+import PageHeader from "../components/PageHeader.astro";
+import PageFooter from "../components/PageFooter.astro";
+import PolicyReference from "../components/PolicyReference.astro";
+---
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{frontmatter.title}</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+    </head>
+    <body>
+        <PageHeader title={frontmatter.title} />
+        <main>
+            <slot />
+            <PolicyReference policies={frontmatter.policy_references} />
+        </main>
+        <PageFooter id={frontmatter.form_id} version={frontmatter.form_version} />
+    </body>
+</html>

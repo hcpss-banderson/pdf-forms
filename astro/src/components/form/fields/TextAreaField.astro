@@ -1,0 +1,51 @@
+---
+import InputLabel from "./InputLabel.astro";
+import camelize from "../../../../utils/camelize.ts";
+
+interface Props {
+    // HTML: label element
+    // PDF:  label element and tooltip
+    // required
+    label: string,
+    // HTML: name attribute
+    // PDF:  name attribute
+    // default: camelCased label
+    name?: string,
+    // HTML: id attribute
+    // PDF:  id attribute (on the tag)
+    // default: camelCased label
+    id?: string,
+    required?: boolean,
+    help?: string,
+    disabled?: boolean,
+    rows?: number,
+}
+const {
+    required = false,
+    help = '',
+    disabled = false,
+    name = '',
+    id = '',
+    rows = 5,
+    label = 'NOLABEL???',
+} = Astro.props
+---
+<div class="field-wrapper">
+  <div class="label-wrapper">
+    <InputLabel labelDisplay="block" for_id={id ? id : camelize(label)} label={label} />
+  </div>
+  <div class="input-wrapper">
+    <textarea
+      rows={rows}
+      id={id ? id : camelize(label)}
+      name={name ? name : camelize(label)}
+      required={required}
+      disabled={disabled}></textarea>
+    {help && <div>{help}</div>}
+  </div>
+</div>
+<style>
+.input-wrapper textarea {
+  width: 100%;
+}
+</style>

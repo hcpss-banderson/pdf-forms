@@ -1,0 +1,25 @@
+services:
+  pdfreactor:
+    container_name: forms_pdfreactor
+    image: realobjects/pdfreactor
+    volumes:
+      - ./config:/ro/config
+  astro:
+    container_name: forms_astro
+    build: astro
+    volumes:
+      - ./astro:/app
+    working_dir: /app
+    ports:
+      - "4321:4321"
+  php:
+    container_name: forms_php
+    build: php
+    ports:
+      - "8888:80"
+    volumes:
+      - "./php/index.php:/var/www/html/index.php"
+    environment:
+      HTML_EXTERNAL_ENDPOINT: "http://localhost:4321"
+      HTML_INTERNAL_ENDPOINT: "http://astro:4321"
+      PDF_REACTOR_ENDPOINT: "http://pdfreactor:9423/service/rest"

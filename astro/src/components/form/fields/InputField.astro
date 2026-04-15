@@ -1,0 +1,101 @@
+---
+import InputLabel from "./InputLabel.astro";
+import camelize from "../../../../utils/camelize.ts";
+
+interface Props {
+  // HTML: label element
+  // PDF:  label element and tooltip
+  // required
+  label: string,
+  // HTML: name attribute
+  // PDF:  name attribute
+  // default: camelCased label
+  name?: string,
+  // HTML: id attribute
+  // PDF:  id attribute (on the tag)
+  // default: camelCased label
+  id?: string,
+  required?: boolean,
+  help?: string,
+  // Accepted values: inline, block, hidden
+  // default: inline
+  labelDisplay?: string,
+  // Should the input grow to fill the available space?
+  // default: true
+  grow?: boolean,
+  disabled?: boolean,
+  // Is this field meant to be displayed within inline text? This is uncommon.
+  // default: false
+  inline?: boolean,
+  // HTML: type attribute
+  // default: text
+  type?: string,
+}
+
+const {
+  required = false,
+  help = '',
+  labelDisplay = 'inline',
+  type = "text",
+  grow = true,
+  disabled = false,
+  name = '',
+  id = '',
+  inline = false,
+  label,
+} = Astro.props
+---
+<div class={labelDisplay + '-label field-wrapper' + (inline ? ' inline-field' : '')}>
+  {labelDisplay !== 'hidden' &&
+      <div class="label-wrapper">
+        <InputLabel for_id={id ? id : camelize(label)} label={label} labelDisplay={labelDisplay} />
+      </div>
+  }
+  <div class="input-wrapper">
+    <input
+        type={type}
+        id={id ? id : camelize(label)}
+        name={name ? name : camelize(label)}
+        class={grow ? 'textfield grow' : 'textfield'}
+        required={required}
+        disabled={disabled}>
+    {help && <div>{help}</div>}
+  </div>
+</div>
+
+<style>
+.inline-label, .hidden-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.block-label {
+  display: block;
+}
+
+.field-wrapper + .field-wrapper {
+  margin-top: 1em;
+}
+
+.textfield {
+  padding: 0;
+  height: 2.2em;
+}
+
+.input-wrapper {
+  flex-grow: 1;
+}
+
+.grow {
+  width: 100%;
+}
+
+.inline-field {
+  display: inline;
+}
+
+.inline-field > * {
+  display: inline;
+}
+</style>

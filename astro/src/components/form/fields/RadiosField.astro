@@ -1,0 +1,79 @@
+---
+interface Props {
+  name: string,
+  help?: string,
+  label: string,
+  labelDisplay?: string,
+  options?: string[],
+  required?: boolean,
+  align?: string,
+  inlineOptions?: boolean,
+}
+const {
+  required = false,
+  help = '',
+  labelDisplay = 'inline',
+  name,
+  align = 'left',
+  options = {"Yes": "Yes", "No": "No"},
+  label,
+  inlineOptions = true,
+} = Astro.props
+---
+<div class="field-wrapper">
+  {labelDisplay !== 'hidden' && (
+    <div class="label-wrapper">
+      {label}
+      {help && (
+        <br>
+        <small>{help}</small>
+      )}
+    </div>
+  )}
+  <div class={'input-wrapper align-' + align + (inlineOptions ? ' inline-field' : ' block-field')}>
+    {Object.entries(options).map(([key, value]) => (
+      <div class={'radio-wrapper radio-' + (inlineOptions ? 'inline' : 'block')}>
+        <input
+            type="radio"
+            id={name ? name + '[' + key + ']' : label + '[' + key + ']'}
+            name={name ? name : label} value={key}
+        /><label for={name ? name + '[' + key + ']' : label + '[' + key + ']'}>{value}</label>
+      </div>
+    ))}
+  </div>
+</div>
+<style>
+.radio-block {
+  display: flex;
+  gap: 0.5rem;
+  align-items: start;
+}
+.inline-field {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.inline-field.align-right {
+  justify-content: flex-end;
+  min-width: max-content;
+}
+
+.radio-wrapper.radio-inline {
+  display: inline-block;
+}
+
+.field-wrapper {
+  display: flex;
+  align-items: center;
+}
+.input-wrapper {
+  text-align: right;
+  flex-grow: 1;
+}
+.input-wrapper.align-left {
+  text-align: left;
+}
+.input-wrapper.align-right {
+  text-align: right;
+}
+</style>

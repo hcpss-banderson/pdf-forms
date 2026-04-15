@@ -1,0 +1,48 @@
+---
+import cssSafeString from "../../../../utils/cssSafeString.ts";
+import InputLabel from "./InputLabel.astro";
+interface Props {
+  name?: string,
+  required?: boolean,
+  help?: string,
+  label: string,
+  labelDisplay?: string,
+  options: string[],
+  grow?: boolean,
+}
+const {
+  required = false,
+  help = '',
+  labelDisplay = 'inline',
+  grow = false,
+  name = '',
+  label = 'NOLABEL???',
+  options = [],
+} = Astro.props
+---
+<div class="field-wrapper">
+  <InputLabel name={name} label={label} labelDisplay={labelDisplay} />
+  <select
+      id={name ? name : cssSafeString(label)}
+      name={name ? name : label}
+      required={required}
+      class={grow ? 'grow' : ''}
+  >
+    {options.map((option) => (
+      <option value="{option}">{option}</option>
+    ))}
+  </select>
+  {help && <div>{help}</div>}
+</div>
+<style>
+.field-wrapper {
+  display: flex;
+  align-items: center;
+}
+.grow {
+  flex-grow: 1;
+}
+select {
+  height: 2.2em;
+}
+</style>

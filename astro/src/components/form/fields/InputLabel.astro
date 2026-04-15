@@ -1,0 +1,24 @@
+---
+interface Props {
+  for_id: string,
+  label: string,
+  labelDisplay?: string,
+}
+const {
+  labelDisplay = 'inline',
+  label,
+  for_id,
+} = Astro.props
+---
+{labelDisplay != 'hidden' &&
+  <label for={for_id} class={labelDisplay}>{label}{labelDisplay === 'inline' && ':'}</label>
+}
+<style>
+label.inline {
+  white-space: nowrap;
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+</style>

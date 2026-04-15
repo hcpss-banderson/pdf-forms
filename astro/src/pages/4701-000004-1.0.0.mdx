@@ -1,0 +1,115 @@
+---
+layout: ../layouts/FormLayout.astro
+form_id: '4701-000004'
+form_version: 1.0.0
+title: International Educational Travel Participant and Parent Agreement
+subtitle: ""
+poc:
+    name: ""
+    email: ""
+policy_references: []
+---
+import FormElement from "../components/FormElement.astro";
+import Grid from "../components/layout/grid/Grid.astro";
+import InputFieldCell from "../components/form/fields/InputFieldCell.astro";
+import SchoolSelectFieldCell from "../components/form/fields/SchoolSelectFieldCell.astro";
+import GradeSelectFieldCell from "../components/form/fields/GradeSelectFieldCell.astro";
+import Heading from "../components/Heading.astro";
+import Section from "../components/layout/Section.astro";
+import Break from "../components/layout/Break.astro";
+import Cell from "../components/layout/grid/Cell.astro";
+import FieldSet from "../components/form/fields/FieldSet.astro";
+import InputField from "../components/form/fields/InputField.astro";
+
+Students are expected to be and remain in good standing in all academics and
+disciplinary areas outlined in the Student Handbook and HCPSS Policies, during
+planning and travel phases of HCPSS International Educational Travel. Students
+are expected to meet all expectations and guidelines as outlined by the Travel
+Leader and International Educational Travel Student Conduct Form. This includes
+student and parent attendance of trip planning meetings and workshops, meeting
+deadlines for submission of money and required paperwork.
+
+In order to participate in educational travel, both students and parents must be
+aware and agree to the following:
+
+- I/we understand the travel is optional and not a requirement
+- The HCPSS reserves the right to cancel a trip at any time to ensure the safety
+  of students and staff members. If such a cancellation occurs, the school
+  system is not responsible for any financial loss incurred by the parent of
+  students participating on the trip.
+- I/ we understand that if the student‘s conduct breaches HCPSS Policy,
+  Student Handbook or those established by the Trip Leader, it may result in
+  loss of privilege to travel on this trip. Similarly, if the breach of conduct is
+  related to the health, safety and welfare of the student and/or other trip
+  participants, it is at the discretion of the Travel Leader, Principal and
+  Administrative Director to send the student home at his/her parent’s expense
+  and/or apply other specified consequences of the violated policy/policies.
+- I/we consent to emergency treatment by a physician in the event of injury or
+  illness of my student participating on the trip, accepting full responsibility
+  for all costs for that treatment.
+- We affirm that our student is in satisfactory and appropriate health to
+  participate in the trip identified. We have provided information of any
+  medical information /medications related to their travel participation.
+- In consideration of my student’s participation and except in the case of
+  reckless or willful misconduct, the HCPSS and Travel Leaders, employees,
+  and agents will be held harmless for any and all claims for medical
+  expenses, loss of services, injury to person or property, death or other
+  claims that may occur at or traveling to or from the trip.
+- I have instructed my student to act in a proper manner at all times in
+  accordance with the directions given by those in charge.
+
+<FormElement>
+  <Grid>
+    <InputFieldCell label="Name of Trip" span={8} />
+    <InputFieldCell label="Date" span={4} />
+  </Grid>
+  <Section>
+    <Heading>Student Information</Heading>
+    <Grid>
+      <InputFieldCell label="Participant's Name" span={8} />
+      <InputFieldCell label="Date of Birth" span={4} />
+      <SchoolSelectFieldCell label="School" grow={true} span={8} />
+      <GradeSelectFieldCell label="Grade" grow={true} span={4} />
+      <InputFieldCell label="Address" />
+      <InputFieldCell label="Passport Number" />
+      <InputFieldCell label="Phone" span={6} />
+      <InputFieldCell label="Email" span={6} />
+    </Grid>
+  </Section>
+  <Section>
+    <Heading>Parent/Guardian Information</Heading>
+    <Grid>
+      <InputFieldCell label="Parent/Guardian Name(s)" labelDisplay="block" />
+      <InputFieldCell label="Address (if Different)" />
+      <InputFieldCell label="Work Phone" span={6} />
+      <InputFieldCell label="Home Phone" span={6} />
+      <InputFieldCell label="Cell Phone" span={6} />
+      <InputFieldCell label="Email" span={6} />
+    </Grid>
+  </Section>
+  <Break />
+  <Section>
+    I/we have read, understand, and agree to the above expectations that are in
+    place for <InputField label="(student’s name)" grow={false} inline={true} />
+    and all HCPSS students participating in the
+    <InputField label="(field trip name)" grow={false} inline={true} /> trip. As
+    the parent/guardian, it understood that our signature is also granting
+    permission for our student to participate in trip.
+  </Section>
+  <Section>
+    <Grid>
+      <InputFieldCell label="Student Signature" span={8} />
+      <InputFieldCell label="Date" span={4} />
+      <Cell>
+        <FieldSet legend="Parent/Guardian Signature(s)">
+          <Grid>
+            <InputFieldCell label="Signature 1" span={8} />
+            <InputFieldCell label="Date" type="date" span={4} />
+            <InputFieldCell label="Signature 2" span={8} />
+            <InputFieldCell label="Date" type="date" span={4} />
+         </Grid>
+        </FieldSet>
+      </Cell>
+    </Grid>
+  </Section>
+</FormElement>

@@ -1,0 +1,39 @@
+---
+import Grid from "../../layout/grid/Grid.astro";
+import Cell from "../../layout/grid/Cell.astro";
+import RadiosField from "./RadiosField.astro";
+import InputField from "./InputField.astro";
+
+interface Props {
+  name?: string,
+  label: string,
+  help?: string,
+  showList?: boolean,
+}
+const { label, help = '', showList = true, name = '' } = Astro.props
+---
+<Grid>
+  <Cell span={3}>
+    <strong>{label}</strong>
+    {help && (
+      <br>
+      <small>{help}</small>
+    )}
+  </Cell>
+  <Cell span={2}>
+    <RadiosField name={name} label={label} labelDisplay="hidden" />
+  </Cell>
+  <Cell span={7}>
+    {showList && (
+      <InputField label="Please List" name={label + '-list'} />
+    )}
+  </Cell>
+</Grid>
+
+<style>
+.list-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+</style>

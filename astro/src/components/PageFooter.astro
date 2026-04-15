@@ -1,0 +1,17 @@
+---
+interface Props {
+    id?: string,
+    version?: string
+}
+const { id = 'mario', version = 'zero' } = Astro.props
+---
+<footer>
+    <p>Howard County Public School System | Form: {id}-{version}</p>
+</footer>
+<style>
+footer {
+    padding: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+</style>
