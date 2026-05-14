@@ -1,11 +1,12 @@
 ---
 interface Props {
   level?: number
+  displayAsLevel?: number
 }
-const { level = 2 } = Astro.props
+const { level = 2, displayAsLevel } = Astro.props
 const Element = `h${level}`
 ---
-<Element>
+<Element class={displayAsLevel ? `is-h${displayAsLevel}` : `is-h${level}`}>
   <slot></slot>
 </Element>
 
@@ -13,7 +14,46 @@ const Element = `h${level}`
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Open Sans',sans-serif;
   }
-  h2 {
-    margin: 2rem 0 1rem 0;
+
+  h1, h1.is-h1, h2.is-h1, h3.is-h1, h4.is-h1, h5.is-h1, h6.is-h1 {
+    display: block;
+    font-size: 2em;
+    margin: 0.67em 0;
+    font-weight: bold;
+  }
+
+  h2, h1.is-h2, h2.is-h2, h3.is-h2, h4.is-h2, h5.is-h2, h6.is-h2 {
+    display: block;
+    font-size: 1.5em;
+    margin: 0.83em 0;
+    font-weight: bold;
+  }
+
+  h3, h1.is-h3, h2.is-h3, h3.is-h3, h4.is-h3, h5.is-h3, h6.is-h3 {
+    display: block;
+    font-size: 1.17em;
+    margin: 1em 0;
+    font-weight: bold;
+  }
+
+  h4, h1.is-h4, h2.is-h4, h3.is-h4, h4.is-h4, h5.is-h4, h6.is-h4 {
+    display: block;
+    font-size: 1em;
+    margin: 1.33em 0;
+    font-weight: bold;
+  }
+
+  h5, h1.is-h5, h2.is-h5, h3.is-h5, h4.is-h5, h5.is-h5, h6.is-h5 {
+    display: block;
+    font-size: .83em;
+    margin: 1.67em 0;
+    font-weight: bold;
+  }
+
+  h6, h1.is-h6, h2.is-h6, h3.is-h6, h4.is-h6, h5.is-h6, h6.is-h6 {
+    display: block;
+    font-size: .67em;
+    margin: 2.33em 0;
+    font-weight: bold;
   }
 </style>

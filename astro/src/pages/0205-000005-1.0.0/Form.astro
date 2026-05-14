@@ -1,0 +1,30 @@
+---
+import FormElement from '../../components/FormElement.astro';
+import Grid from '../../components/layout/grid/Grid.astro';
+import InputFieldCell from '../../components/form/fields/InputFieldCell.astro';
+import TextAreaField from '../../components/form/fields/TextAreaField.astro';
+import Cell from '../../components/layout/grid/Cell.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+import { ui } from './ui.ts'
+const t = useTranslations(lang, ui);
+---
+<FormElement>
+    <Grid>
+        <InputFieldCell label={t('account.manager')} span={6} />
+        <InputFieldCell label={t('account.manager.signature')} span={6} />
+        <InputFieldCell label={t('date')} type="date" span={6} />
+        <InputFieldCell label={t('phone')} type="tel" span={6} />
+        <InputFieldCell label={t('company.name')} span={6} />
+        <InputFieldCell label={t('amount')} id="amount" name="amount" span={6} />
+        <Cell>
+            <TextAreaField name="servicesRequested" id="servicesRequested" label={t('describe')} />
+        </Cell>
+        <Cell>
+            <TextAreaField name="risks" id="risks" label={t('risks')} />
+        </Cell>
+        <Cell>
+            <TextAreaField name="info" id="info" label={t('information')} />
+        </Cell>
+    </Grid>
+</FormElement>

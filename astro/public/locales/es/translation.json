@@ -1,0 +1,26 @@
+{
+  "4701-000004": {
+    "name_trip": "Nombre del viaje",
+    "date": "Fecha",
+    "student_info": "Información para estudiantes",
+    "participant_name": "Nombre del participante",
+    "birth_date": "Fecha de nacimiento",
+    "school": "Escuela",
+    "grade": "Calificación",
+    "address": "DIRECCIÓN",
+    "passport_number": "Número de pasaporte",
+    "phone": "Teléfono",
+    "email": "Correo electrónico",
+    "parent_info": "Información para padres/tutores",
+    "parent_name": "Nombre(s) del padre/madre o tutor legal",
+    "address.if.different": "Dirección (si es diferente)",
+    "work_phone": "Teléfono del trabajo",
+    "home_phone": "Teléfono fijo",
+    "cell_phone": "Teléfono móvil",
+    "agreement": "He leído, comprendo y acepto las expectativas mencionadas anteriormente, las cuales rigen para <0>student name</0> y todos los estudiantes de HCPSS que participan en la excursión <1>field trip.name</1>. Como padre/madre o tutor legal, entiendo que mi firma también otorga permiso para que mi hijo/a participe en la excursión.",
+    "student_signature": "Firma del estudiante",
+    "parent_signature": "Firma(s) del padre/madre o tutor legal",
+    "signature1": "Firma 1",
+    "signature2": "Firma 2"
+  }
+}

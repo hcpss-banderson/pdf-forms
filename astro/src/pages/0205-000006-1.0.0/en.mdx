@@ -1,19 +1,10 @@
 ---
-layout: ../layouts/FormLayout.astro
-form_id: '0205-000006'
-form_version: '1.0.0'
+layout: ../../layouts/FormLayout.astro
 title: 'Single Source Justification'
 subtitle: ''
-poc:
-    name: 'Robert Bruce'
-    email: 'robert_bruce1@hcpss.org'
-policy_references: ['4050']
 ---
-import FormElement from '../components/FormElement.astro';
-import Grid from '../components/layout/grid/Grid.astro';
-import InputFieldCell from '../components/form/fields/InputFieldCell.astro';
-import TextAreaField from '../components/form/fields/TextAreaField.astro';
-import Cell from '../components/layout/grid/Cell.astro';
+
+import Form from './Form.astro';
 
 ## Purpose
 
@@ -49,22 +40,4 @@ investigations. I also certify that no personal advantage, gain or privilege has
 (or will) accrue to my immediate family or myself through the purchase from this
 company, nor is a family member employed by, or is an officer of this company.
 
-<FormElement>
-    <Grid>
-        <InputFieldCell label="Account Manager" span={6} />
-        <InputFieldCell label="Account Manager Signature" span={6} />
-        <InputFieldCell label="Date" type="date" span={6} />
-        <InputFieldCell label="Phone" type="tel" span={6} />
-        <InputFieldCell label="Name of Company" span={6} />
-        <InputFieldCell label="Amount/value" id="amount" name="amount" span={6} />
-        <Cell>
-            <TextAreaField name="servicesRequested" id="servicesRequested" label="Briefly describe the equipment, construction, supplies or services requested, and its purpose or use:" />
-        </Cell>
-        <Cell>
-            <TextAreaField name="risks" id="risks" label="What are the consequences or risks of not securing this equipment, construction, supplies or services from this company?" />
-        </Cell>
-        <Cell>
-            <TextAreaField name="info" id="info" label="Please provide information that supports your specific requirements necessitating a sole source purchase:" />
-        </Cell>
-    </Grid>
-</FormElement>
+<Form />

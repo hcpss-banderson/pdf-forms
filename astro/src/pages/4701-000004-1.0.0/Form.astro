@@ -1,0 +1,71 @@
+---
+import FormElement from "../../components/FormElement.astro";
+import Grid from "../../components/layout/grid/Grid.astro";
+import InputFieldCell from "../../components/form/fields/InputFieldCell.astro";
+import SchoolSelectFieldCell from "../../components/form/fields/SchoolSelectFieldCell.astro";
+import GradeSelectFieldCell from "../../components/form/fields/GradeSelectFieldCell.astro";
+import Heading from "../../components/Heading.astro";
+import Section from "../../components/layout/Section.astro";
+import Break from "../../components/layout/Break.astro";
+import Cell from "../../components/layout/grid/Cell.astro";
+import FieldSet from "../../components/form/fields/FieldSet.astro";
+import InputField from "../../components/form/fields/InputField.astro";
+import Trans from "../../components/Trans.astro";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+import { ui } from './ui.ts'
+const t = useTranslations(lang, ui);
+const agreement = await t('agreement');
+---
+
+<FormElement>
+    <Grid>
+        <InputFieldCell label={t("name.trip")} span={8} />
+        <InputFieldCell label={t('date')} span={4} />
+    </Grid>
+    <Section>
+        <Heading>{t('student.info')}</Heading>
+        <Grid>
+            <InputFieldCell label={t('participant.name')} span={8} />
+            <InputFieldCell label={t('birth.date')} span={4} />
+            <SchoolSelectFieldCell label={t('school')} grow={true} span={8} />
+            <GradeSelectFieldCell label={t('grade')} grow={true} span={4} />
+            <InputFieldCell label={t('address')} />
+            <InputFieldCell label={t('passport.number')} />
+            <InputFieldCell label={t('phone')} span={6} />
+            <InputFieldCell label={t('email')} span={6} />
+        </Grid>
+    </Section>
+    <Section>
+        <Heading>{t('parent.info')}</Heading>
+        <Grid>
+            <InputFieldCell label={t('parent.name')} labelDisplay="block" />
+            <InputFieldCell label={t('address.if.different')} />
+            <InputFieldCell label={t('work.phone')} span={6} />
+            <InputFieldCell label={t('home.phone')} span={6} />
+            <InputFieldCell label={t('cell.phone')} span={6} />
+            <InputFieldCell label={t('email')} span={6} />
+        </Grid>
+    </Section>
+    <Break />
+    <Section>
+        <Trans set:html={t('agreement')} />
+
+    </Section>
+    <Section>
+        <Grid>
+            <InputFieldCell label={t('student.signature')} span={8} />
+            <InputFieldCell label={t('date')} span={4} />
+            <Cell>
+                <FieldSet legend={t('parent.signature')}>
+                    <Grid>
+                        <InputFieldCell label={t('signature1')} span={8} />
+                        <InputFieldCell label={t('date')} type="date" span={4} />
+                        <InputFieldCell label={t('signature2')} span={8} />
+                        <InputFieldCell label={t('date')} type="date" span={4} />
+                    </Grid>
+                </FieldSet>
+            </Cell>
+        </Grid>
+    </Section>
+</FormElement>

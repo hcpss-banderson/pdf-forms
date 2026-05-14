@@ -1,0 +1,26 @@
+---
+
+---
+<div class="card">
+    <slot />
+</div>
+<style>
+    .card {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+    }
+
+    .card + .card {
+        margin-top: 1rem;
+    }
+
+    .card > :global(h1:nth-child(1)),
+    .card > :global(h2:nth-child(1)),
+    .card > :global(h3:nth-child(1)),
+    .card > :global(h4:nth-child(1)),
+    .card > :global(h5:nth-child(1)),
+    .card > :global(h6:nth-child(1)) {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+</style>

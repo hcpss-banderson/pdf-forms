@@ -1,0 +1,11 @@
+---
+const html = await Astro.slots.render('default');
+
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+//import MyComponent from './components/MyComponent.astro';
+
+const container = await AstroContainer.create();
+const htmlString = await container.renderToString(html);
+---
+
+<Fragment set:html={html} />

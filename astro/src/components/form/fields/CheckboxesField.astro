@@ -1,0 +1,83 @@
+---
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import InputField from "./InputField.astro";
+import InputLabel from "./InputLabel.astro";
+import CheckboxField from "./CheckboxField.astro";
+const lang = getLangFromUrl(Astro.url);
+import { ui } from '../../../i18n/ui'
+const t = useTranslations(lang, ui);
+interface Props {
+    name: string,
+    help?: string,
+    label: string,
+    labelDisplay?: string,
+    options?: string[],
+    required?: boolean,
+    align?: string,
+    inlineOptions?: boolean,
+    otherOption?: boolean,
+}
+const {
+    required = false,
+    help = '',
+    labelDisplay = 'inline',
+    name,
+    align = 'left',
+    options = {"yes": t("yes"), "no": t("no")},
+    label,
+    inlineOptions = true,
+    otherOption = false,
+} = Astro.props
+---
+<div class="checkboxes-wrapper">
+    {labelDisplay !== 'hidden' &&
+        <div class="label-wrapper">
+            <InputLabel label={label} />
+        </div>
+    }
+    <div class={inlineOptions ? 'checkbox-options-wrapper-inline' : 'checkbox-options-wrapper'}>
+        {Object.entries(options).map(([key, value]) => (
+            <CheckboxField
+                id={name ? name + '[' + key + ']' : label + '[' + key + ']'}
+                name={name ? name : label}
+                label={value}
+                value={key} />
+        ))}
+        {otherOption && (
+            <CheckboxField
+                id={name ? name + '[other]' : label + '[other]'}
+                name={name ? name : label}
+                label={t('Other (list)')}
+                value={'other'} />
+            <InputField
+                id={name ? name + '[other_list]' : label + '[other_list]'}
+                name={name ? name + '[other_list]' : label + '[other_list]'}
+                labelDisplay="hidden"
+                label={t('Other (list)')}
+                grow={true}
+            />
+        )}
+    </div>
+</div>
+<style>
+    .checkbox-options-wrapper-inline {
+        flex-grow: 1;
+    }
+    .checkboxes-wrapper, .checkbox-options-wrapper-inline {
+        display: flex;
+        align-content: center;
+        gap: 0.5rem;
+    }
+    .checkbox-options-wrapper-inline > :global(.grow-field-wrapper) {
+        flex-grow: 1;
+        min-width: 0;
+    }
+    .grow-field-wrapper {
+        flex-grow: 1;
+        min-width: 0;
+    }
+    .checkbox-options-wrapper {
+        flex-grow: 1;
+        min-width: 0;
+    }
+</style>

@@ -12,7 +12,7 @@ interface Props {
   // default: camelCased label
   name?: string,
   // HTML: id attribute
-  // PDF:  id attribute (on the tag)
+  // PDF: id attribute (on the tag)
   // default: camelCased label
   id?: string,
   required?: boolean,
@@ -45,13 +45,13 @@ const {
   label,
 } = Astro.props
 ---
-<div class={labelDisplay + '-label field-wrapper' + (inline ? ' inline-field' : '')}>
+<div class={labelDisplay + '-label field-wrapper' + (inline ? ' inline-field' : '') + (grow ? ' grow-field-wrapper' : '')}>
   {labelDisplay !== 'hidden' &&
       <div class="label-wrapper">
         <InputLabel for_id={id ? id : camelize(label)} label={label} labelDisplay={labelDisplay} />
       </div>
   }
-  <div class="input-wrapper">
+  <div class={grow ? 'input-wrapper grow-input-wrapper' : 'input-wrapper'}>
     <input
         type={type}
         id={id ? id : camelize(label)}
@@ -59,23 +59,31 @@ const {
         class={grow ? 'textfield grow' : 'textfield'}
         required={required}
         disabled={disabled}>
-    {help && <div>{help}</div>}
+    {help && <div class="help"><small>{help}</small></div>}
   </div>
 </div>
 
 <style>
 .inline-label, .hidden-label {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.5em;
+}
+
+.help {
+  text-align: left;
+}
+
+input {
+  box-sizing: border-box;
+}
+
+.grow-input-wrapper {
+  text-align: right;
 }
 
 .block-label {
   display: block;
-}
-
-.field-wrapper + .field-wrapper {
-  margin-top: 1em;
 }
 
 .textfield {
@@ -89,6 +97,7 @@ const {
 
 .grow {
   width: 100%;
+  box-sizing: border-box;
 }
 
 .inline-field {

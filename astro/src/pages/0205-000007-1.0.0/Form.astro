@@ -1,0 +1,98 @@
+---
+import FormElement from "../../components/FormElement.astro";
+import Heading from "../../components/Heading.astro";
+import InputField from "../../components/form/fields/InputField.astro";
+import InputFieldCell from "../../components/form/fields/InputFieldCell.astro";
+import RadiosField from "../../components/form/fields/RadiosField.astro";
+import Section from "../../components/layout/Section.astro";
+import Stripes from "../../components/form/fields/Stripes.astro";
+import Grid from "../../components/layout/grid/Grid.astro";
+import TextAreaField from "../../components/form/fields/TextAreaField.astro";
+import Cell from "../../components/layout/grid/Cell.astro";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+import { ui } from './ui.ts'
+const t = useTranslations(lang, ui);
+---
+<FormElement>
+    <InputField label={t('solicitation.title')} />
+    <Heading>{t('meets.requirements')}</Heading>
+    <Stripes>
+        <RadiosField align="right" name="authority" label={t('authority')} />
+        <RadiosField align="right" name="public" label={t('public')} />
+        <RadiosField align="right" name="consistent" label={t('consistent')} help={t('consistent.help')} />
+        <RadiosField align="right" name="language" label={t('language')} />
+        <RadiosField align="right" name="icpa" label={t('icpa')} />
+        <RadiosField align="right" name="rfp_ifp" label={t('rfp_ifp')} help={t('rfp_ifp.help')} />
+        <RadiosField align="right" name="agreedToAllow" label={t('agreedToAllow')} />
+        <RadiosField align="right" name="inEffect" label={t('inEffect')} />
+        <RadiosField align="right" name="deparment" label={t('deparment')} help={t('deparment.help')} />
+    </Stripes>
+    <Section>
+        <RadiosField align="right" name="reviewed" label={t('reviewed')} options={[t('reviewed.meets'), t('reviewed.notmeets')]} />
+    </Section>
+    <Section>
+        <Grid>
+            <InputFieldCell label={t('requestor')} span={8} />
+            <InputFieldCell label={t('date')} span={4} />
+            <InputFieldCell label={t('procurement.specialist')} span={8} />
+            <InputFieldCell label={t('date')} span={4} />
+        </Grid>
+    </Section>
+    <Section>
+        <Heading>{t('step1')}</Heading>
+        <Grid>
+            <InputFieldCell label={t("requesting.office")} />
+            <InputFieldCell label={t('contact.name')} />
+            <InputFieldCell label={t('phone')} span={6} />
+            <InputFieldCell label={t('email')} span={6} />
+            <hr />
+            <InputFieldCell label={t('coop.procurement')} />
+            <InputFieldCell label={t('contact.name')} />
+            <InputFieldCell label={t('phone')} span={6} />
+            <InputFieldCell label={t('email')} span={6} />
+            <hr />
+            <InputFieldCell label={t('vendor.name')} />
+            <InputFieldCell label={t('contact.name')} />
+            <InputFieldCell label={t('phone')} span={6} />
+            <InputFieldCell label={t('email')} span={6} />
+            <hr />
+            <InputFieldCell label={t('procurement.method')} />
+            <InputFieldCell label={t('contract.term')} span={6} />
+            <InputFieldCell label={t('available.options')} span={6} />
+            <Cell>
+                <TextAreaField label={t('purchase.description')} />
+            </Cell>
+            <Cell>
+                <TextAreaField label={t('economic.justification')} help={t('economic.justification.help')} />
+            </Cell>
+        </Grid>
+    </Section>
+    <Section>
+        <Heading>{t('step2')}</Heading>
+        <Stripes>
+            <RadiosField align="right" name="adv_90_days" label={t('adv_90_days')} />
+            <RadiosField align="right" name="des_time_place" label={t('des_time_place')} />
+            <RadiosField align="right" name="witness" label={t('witness')} />
+            <RadiosField align="right" name="ifb_names_recorded" label={t('ifb_names_recorded')} />
+            <RadiosField align="right" name="ifb_names_communicated" label={t('ifb_names_communicated')} />
+            <RadiosField align="right" name="ifb_responsive" label={t('ifb_responsive')} />
+            <RadiosField align="right" name="rfp_evaluated" label={t('rfp_evaluated')} />
+            <RadiosField align="right" name="rfb_protests" label={t('rfb_protests')} />
+            <RadiosField align="right" name="both_secure" label={t('both_secure')} />
+        </Stripes>
+    </Section>
+    <Section>
+        <Heading>{t('step3')}</Heading>
+        <Grid>
+            <Cell>
+                <RadiosField inlineOptions={false} label={t('oucome')} labelDisplay="hidden" options={{'approved': t('approved'), 'denied': t('denied')}} />
+            </Cell>
+            <Cell>
+                <TextAreaField label={t('additional')} />
+            </Cell>
+            <InputFieldCell label={t('director')} span={8} />
+            <InputFieldCell label={t('date')} span={4} />
+        </Grid>
+    </Section>
+</FormElement>

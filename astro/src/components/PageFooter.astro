@@ -1,4 +1,9 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+import { ui } from '../i18n/ui'
+const t = useTranslations(lang, ui);
+
 interface Props {
     id?: string,
     version?: string
@@ -6,7 +11,7 @@ interface Props {
 const { id = 'mario', version = 'zero' } = Astro.props
 ---
 <footer>
-    <p>Howard County Public School System | Form: {id}-{version}</p>
+    <p>Howard County Public School System | {t('form')}: {id}-{version}</p>
 </footer>
 <style>
 footer {

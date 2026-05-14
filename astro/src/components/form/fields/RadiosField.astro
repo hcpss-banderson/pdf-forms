@@ -1,4 +1,8 @@
 ---
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+import { ui } from '../../../i18n/ui'
+const t = useTranslations(lang, ui);
 interface Props {
   name: string,
   help?: string,
@@ -15,12 +19,12 @@ const {
   labelDisplay = 'inline',
   name,
   align = 'left',
-  options = {"Yes": "Yes", "No": "No"},
+  options = {"yes": t("yes"), "no": t("no")},
   label,
   inlineOptions = true,
 } = Astro.props
 ---
-<div class="field-wrapper">
+<div class={labelDisplay === 'block' ? 'field-wrapper field-wrapper-block' : 'field-wrapper'}>
   {labelDisplay !== 'hidden' && (
     <div class="label-wrapper">
       {label}
@@ -43,10 +47,16 @@ const {
   </div>
 </div>
 <style>
+label {
+  white-space: nowrap;
+}
+.radio-wrapper {
+  white-space: nowrap;
+}
 .radio-block {
   display: flex;
   gap: 0.5rem;
-  align-items: start;
+  align-items: center;
 }
 .inline-field {
   display: flex;
@@ -66,6 +76,11 @@ const {
   display: flex;
   align-items: center;
 }
+
+.field-wrapper-block {
+  display: block;
+}
+
 .input-wrapper {
   text-align: right;
   flex-grow: 1;

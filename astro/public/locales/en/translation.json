@@ -1,0 +1,29 @@
+{
+  "4701-000004": {
+    "name_trip": "Name of Trip",
+    "date": "Date",
+    "student.info": "Student Information",
+    "participant.name": "Participant's Name",
+    "birth_date": "Date of Birth",
+    "school": "School",
+    "grade": "Grade",
+    "address": "Address",
+    "passport_number": "Passport Number",
+    "phone": "Phone",
+    "email": "Email",
+    "parent_info": "Parent/Guardian Information",
+    "parent_name": "Parent/Guardian Name(s)",
+    "address_if_different": "Address (if Different)",
+    "work_phone": "Work Phone",
+    "home_phone": "Home Phone",
+    "cell_phone": "Cell Phone",
+    "agreement": "I/we have read, understand, and agree to the above expectations that are in place for <0>student name</0> and all HCPSS students participating in the <1>field trip name</1> trip. As the parent/guardian, it understood that our signature is also granting permission for our student to participate in trip.",
+    "student_signature": "Student Signature",
+    "parent_signature": "Parent/Guardian Signature(s)",
+    "signature1": "Signature 1",
+    "signature2": "Signature 2"
+  },
+  "test": {
+    "test": "Test"
+  }
+}

@@ -1,23 +1,47 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import PageHeader from "../components/PageHeader.astro";
+import PageFooter from "../components/PageFooter.astro";
+import PolicyReference from "../components/PolicyReference.astro";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const pages = import.meta.glob('./*.mdx');
 const pagePaths = Object.keys(pages);
+
+
+const indexes = import.meta.glob('./**/index.mdx', { eager: true });
+
+// Object.entries(indexes).forEach(([path, index]) => {
+//     console.log(path, index.frontmatter);
+// });
+
+
+
+const indexPaths = Object.keys(indexes);
+const indexItems = Object.values(indexes);
+
+
+
+//console.log(indexes);
 ---
 
-<html lang="en">
+<html lang={lang}>
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>HCPSS Forms</title>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="./style.css">
 	</head>
 	<body>
-		<h1>Astro</h1>
-		<ul>
-			{pagePaths.map((path) => (
-				<li><a href={path.replace('../pages/', '/').replace(/\/index|\.astro|\.mdx/g, '')}>{path}</a></li>
-			))}
-		</ul>
+		<PageHeader title="Forms" />
+		<main>
+			<ul>
+				{indexItems.map((item) => (
+					<li><a href={item.url}>{item.frontmatter.form_id}</a></li>
+				))}
+			</ul>
+		</main>
 	</body>
 </html>

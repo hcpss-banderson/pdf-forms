@@ -1,16 +1,19 @@
----
-interface Props {
-  legend: string,
-}
-const { legend } = Astro.props
----
 <fieldset>
-  <legend>{legend}</legend>
   <slot></slot>
 </fieldset>
 <style>
 fieldset {
   margin: 2rem 0;
-  padding: 2rem 1rem;
+  padding: 1rem;
+}
+
+fieldset > :global(h1:nth-child(1)),
+fieldset > :global(h2:nth-child(1)),
+fieldset > :global(h3:nth-child(1)),
+fieldset > :global(h4:nth-child(1)),
+fieldset > :global(h5:nth-child(1)),
+fieldset > :global(h6:nth-child(1)) {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
 </style>

@@ -1,4 +1,8 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+import { ui } from '../i18n/ui'
+const t = useTranslations(lang, ui);
 import policyUrl from "../../utils/policyUrl.ts";
 interface Props {
     policies: string[]
@@ -7,7 +11,7 @@ const { policies = [] } = Astro.props;
 ---
 {policies.length > 0 && (
     <p>
-        Related policies:
+        {t('related.policies')}:
         {policies.map((policy, i) => (
             <span>{(i !== 0) && ', '}<a href={policyUrl(policy)}>{policy}</a></span>
         ))}

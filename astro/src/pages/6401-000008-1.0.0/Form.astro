@@ -1,0 +1,283 @@
+---
+import FormElement from "../../components/FormElement.astro";
+import Grid from "../../components/layout/grid/Grid.astro";
+import InputFieldCell from "../../components/form/fields/InputFieldCell.astro";
+import RadiosFieldCell from "../../components/form/fields/RadiosFieldCell.astro";
+import RadiosField from "../../components/form/fields/RadiosField.astro";
+import CheckboxesField from "../../components/form/fields/CheckboxesField.astro";
+import SchoolSelectFieldCell from "../../components/form/fields/SchoolSelectFieldCell.astro";
+import GradeSelectFieldCell from "../../components/form/fields/GradeSelectFieldCell.astro";
+import Heading from "../../components/Heading.astro";
+import Card from "../../components/Card.astro";
+import Section from "../../components/layout/Section.astro";
+import Break from "../../components/layout/Break.astro";
+import Cell from "../../components/layout/grid/Cell.astro";
+import FieldSet from "../../components/form/fields/FieldSet.astro";
+import InputField from "../../components/form/fields/InputField.astro";
+import TextAreaField from "../../components/form/fields/TextAreaField.astro";
+import Trans from "../../components/Trans.astro";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+import { ui } from './ui.ts'
+const t = useTranslations(lang, ui);
+---
+<FormElement>
+    <FieldSet>
+        <Heading level={2} displayAsLevel={4}>
+            {t('Medication Form for Students with Allergic Reactions - To be completed by physician/authorized prescriber')}
+        </Heading>
+        <Grid>
+            <InputFieldCell label={t("Student's Name")} name="students_name" span={4} />
+            <RadiosFieldCell label={t('Gender')} span={2} options={[t('Male'), t('Female')]} />
+            <InputFieldCell label={t("School/Grade")} name="school_grade" span={3} />
+            <InputFieldCell label={t("Date of Birth")} type="date" span={3} />
+            <InputFieldCell label={t("Student Allergies")} />
+            <Cell span={12}>
+                <CheckboxesField label={t('Known Triggers')} otherOption={true} options={{"Ingestion": "Ingestion", "Touch": "Touch", "Sting": "Sting"}} />
+            </Cell>
+            <InputFieldCell type="date" label={t("Date of Order")} span={4} />
+            <InputFieldCell label={t("Order Valid for Current Year including Summer School, unless otherwise indicated")} span={8} />
+
+            <InputFieldCell label={t("Physician/Prescriber Signature")} span={6} />
+            <InputFieldCell label={t("Phone")} span={6} />
+            <InputFieldCell label={t("Physician/Prescriber: Print Name")} span={6} />
+            <InputFieldCell label={t("Fax")} span={6} />
+            <InputFieldCell label={t("Parent/Guardian Signature")} span={6} help="I/We authorize the school nurse to communicate with the health care provider as allowed by HIPAA." />
+            <InputFieldCell label={t("Phone")} span={6} />
+            <InputFieldCell label={t("Parent/Guardian: Print Name")} span={6} />
+            <InputFieldCell label={t("Cell Phone")} span={6} />
+            <Cell span={4}>
+                <Card>
+                    <Heading level={3} displayAsLevel={4}>
+                        {t('Epinephrine Auto-Injector Order ')}
+                    </Heading>
+                    <div class="field-wrapper">{t('Route: (IM) into anterolateral aspect of the thigh) ')}</div>
+                    <RadiosField label={t('Dose')} options={['0.15mg', '0.30mg']} />
+                    <RadiosField label={t('Student is able to self-administer')} />
+                    <RadiosField label={t('Student may self carry this medication')} />
+                    <InputField label={t('Expiration Date')} type="date" />
+                    <InputField label={t('Possible Side Effects')} />
+                </Card>
+            </Cell>
+            <Cell span={4}>
+                <Card>
+                    <Heading level={3} displayAsLevel={4}>
+                        {t('Nasal Epinephrine Medication Order (Neffy) ')}
+                    </Heading>
+                    <div class="field-wrapper">{t('Route: Intranasal ')}</div>
+                    <RadiosField label={t('Dose')} options={['1mg', '2mg']} />
+                    <RadiosField label={t('Student is able to self-administer')} />
+                    <RadiosField label={t('Student may self carry this medication')} />
+                    <InputField label={t('Expiration Date')} type="date" />
+                    <InputField label={t('Possible Side Effects')} />
+                </Card>
+            </Cell>
+            <Cell span={4}>
+                <Card>
+                    <Heading level={3} displayAsLevel={4}>
+                        {t('Oral Medication Order')}
+                    </Heading>
+                    <InputField label={t('Dose')} />
+                    <InputField label={t('Strength')} />
+                    <InputField label={t('Frequency')} />
+                    <InputField label={t('Date Medication Expires')} type="date" />
+                    <InputField label={t('Possible Side Effects')} />
+                </Card>
+            </Cell>
+            <Cell>
+                <Heading level={3}>{t('Administration Choices (please check all that apply)')}</Heading>
+            </Cell>
+            <Cell span={10}>
+                <div class="field-wrapper">
+                    <div>Administer <InputField grow={false} inline={true} label={t('oral medication')} /> for
+                    known or possible ingestion/touch/sting/other (list)
+                    <InputField labelDisplay="hidden" grow={false} inline={true} label={t('other')} /></div>
+
+                    <CheckboxesField labelDisplay="hidden" inlineOptions={false} label={t('Administer')} options={{
+                        "Prior to onset of symptoms": "Prior to onset of symptoms",
+                        "If student develops hives, rash, itchy mouth or other symptom(s) (list)": "If student develops hives, rash, itchy mouth or other symptom(s) (list)",
+                        "After Epinephrine is given": "After Epinephrine is given"
+                    }} />
+                </div>
+                <div class="field-wrapper">
+                    <div>Give Epinephrine for known or possible ingestion/touch/sting/other
+                    <InputField labelDisplay="hidden" grow={false} inline={true} label={t('oral medication')} />
+                    of
+                    <InputField labelDisplay="hidden" grow={false} inline={true} label={t('other')} /></div>
+
+                    <CheckboxesField labelDisplay="hidden" inlineOptions={false} label={t('Administer')} options={{
+                        "Prior to onset of symptoms": "Prior to onset of symptoms",
+                        "At first sign of any symptoms (see back for list)": "At first sign of any symptoms (see back for list)",
+                        "Only if student develops throat/lung/heart symptoms or if two or more body systems are involved (see back for list)": "Only if student develops throat/lung/heart symptoms or if two or more body systems are involved (see back for list)"
+                    }} />
+                </div>
+                <TextAreaField label={t('Other Instructions')} />
+            </Cell>
+            <Cell span={2}>
+                <div style="padding: 1em; width: 100%; border: 1px solid black; display: flex; height: 200px;">
+                    Student Photo
+                </div>
+            </Cell>
+        </Grid>
+    </FieldSet>
+
+    <Break />
+
+    <Grid>
+        <InputFieldCell label={t("Student Name")} span={6} />
+        <InputFieldCell label={t("DOB")} span={3} />
+        <InputFieldCell label={t("Date")} span={3} />
+        <Cell>
+            <Heading level={2} displayAsLevel={4}>
+                Anaphylaxis Symptoms (by body systems)
+            </Heading>
+        </Cell>
+        <Cell span={7}>
+            <Grid>
+                <Cell span={4}>
+                    <Card>
+                        <Heading level={3} displayAsLevel={4}>{t("Mouth/Throat")}</Heading>
+                        <ul>
+                            <li>{t('Itching, tingling, or swelling of lips, tongue, or mouth')}</li>
+                            <li>{t('Blue/grey color of lips')}</li>
+                            <li>{t('Hacking cough')}</li>
+                            <li>{t('Tightening of throat')}</li>
+                            <li>{t('Hoarseness')}</li>
+                            <li>{t('Difficulty swallowing')}</li>
+                        </ul>
+                    </Card>
+                </Cell>
+                <Cell span={4}>
+                    <Card>
+                        <Heading level={3} displayAsLevel={4}>{t("Nose/Eyes/Ears")}</Heading>
+                        <ul>
+                            <li>{t('Runny nose, itchy nose')}</li>
+                            <li>{t('Redness and/or swelling of eyes')}</li>
+                            <li>{t('Throbbing in ears')}</li>
+                        </ul>
+                    </Card>
+                </Cell>
+                <Cell span={4}>
+                    <Card>
+                        <Heading level={3} displayAsLevel={4}>{t("Gastrointestinal")}</Heading>
+                        <ul>
+                            <li>{t('Nausea')}</li>
+                            <li>{t('Abdominal cramps')}</li>
+                            <li>{t('Vomiting')}</li>
+                            <li>{t('Diarrhea')}</li>
+                        </ul>
+                    </Card>
+                </Cell>
+                <Cell span={4}>
+                    <Card>
+                        <Heading level={3} displayAsLevel={4}>{t("Skin")}</Heading>
+                        <ul>
+                            <li>{t('Facial flushing')}</li>
+                            <li>{t('Hives and/or generalized itchy rash')}</li>
+                            <li>{t('Swelling of face or extremities')}</li>
+                            <li>{t('Tingling')}</li>
+                            <li>{t('Blue/grey discoloration')}</li>
+                        </ul>
+                    </Card>
+                </Cell>
+                <Cell span={4}>
+                    <Card>
+                        <Heading level={3} displayAsLevel={4}>{t("Lungs")}</Heading>
+                        <ul>
+                            <li>{t('Shortness of breath')}</li>
+                            <li>{t('Wheezing')}</li>
+                            <li>{t('Short, frequent, shallow cough')}</li>
+                            <li>{t('Difficulty breathing')}</li>
+                        </ul>
+                    </Card>
+                </Cell>
+                <Cell span={4}>
+                    <Card>
+                        <Heading level={3} displayAsLevel={4}>{t("Heart")}</Heading>
+                        <ul>
+                            <li>{t('Thready or unobtainable pulse')}</li>
+                            <li>{t('Low blood pressure')}</li>
+                            <li>{t('Rapid pulse, palpitations, fainting, dizziness')}</li>
+                            <li>{t('Pale, blue/grey color of lips or nail bed')}</li>
+                        </ul>
+                    </Card>
+                </Cell>
+                <Cell span={4}>
+                    <Card>
+                        <Heading level={3} displayAsLevel={4}>{t("Mental")}</Heading>
+                        <ul>
+                            <li>{t('Uneasiness')}</li>
+                            <li>{t('Agitation')}</li>
+                            <li>{t('Unconsciousness')}</li>
+                            <li>{t('Feeling of doom')}</li>
+                        </ul>
+                    </Card>
+                </Cell>
+                <Cell span={4}>
+                    <Card>
+                        <Heading level={3} displayAsLevel={4}>{t("Other")}</Heading>
+                        <p>{t('Any other symptom specific to an individual\'s response to a specific allergen')}</p>
+                    </Card>
+                </Cell>
+            </Grid>
+        </Cell>
+        <Cell span={5}>
+            <ul>
+                <li><strong>{t('Call 911 as soon as symptoms of anaphylaxis are observed and need for epinephrine determined.')}</strong></li>
+                <li><strong>{t('Call parents after giving epinephrine and calling 911.')}</strong></li>
+            </ul>
+            <Card>
+                <Heading level={4} displayAsLevel={5}>{t("Instructions to give auto-injector epinephrine")}</Heading>
+                <ol>
+                    <li>{t('Identify student.')}</li>
+                    <li>{t('Remove safety cap.')}</li>
+                    <li>{t('Place tip against outer thigh')}</li>
+                    <li>{t('Push firmly until you hear injector function (click) and hold in place according to manufacturer\'s directions.')}</li>
+                    <li>{t('Monitor student -Initiate CPR if necessary.')}</li>
+                    <li>{t('Begin CPR if necessary.')}</li>
+                </ol>
+            </Card>
+            <Card>
+                <Heading level={4} displayAsLevel={5}>{t("Instructions to give inhaled epinephrine")}</Heading>
+                <ol>
+                    <li>{t('Identify student.')}</li>
+                    <li>{t('Remove Neffy from packaging')}</li>
+                    <li>{t('Insert into nostril until fingers touch the base of the nose')}</li>
+                    <li>{t('Press plunger firmly until it SNAPS UP and delivers liquid into the nostril')}</li>
+                    <li>{t('Monitor student -Initiate CPR if necessary.')}</li>
+                    <li>{t('Begin CPR if necessary.')}</li>
+                </ol>
+            </Card>
+        </Cell>
+    </Grid>
+    <FieldSet>
+        <Heading level={2} displayAsLevel={4}>
+            {t('Oral Medication Administration')}
+        </Heading>
+        <Grid>
+            <InputFieldCell label={t("Medication")} span={4} />
+            <InputFieldCell label={t("Administered on")} help={t('Date')} span={4} />
+            <InputFieldCell label={t("at")} help={t('Time')} span={4} />
+            <InputFieldCell label={t("Symptoms/Reasons")} span={6} />
+            <InputFieldCell label={t("Signature")} span={6} />
+        </Grid>
+    </FieldSet>
+    <FieldSet>
+        <Grid>
+            <RadiosFieldCell label={t('Epinephrine (Auto-Injector)')} options={['0.15 mg', '0.30 mg']} span={4} />
+            <RadiosFieldCell label={t('Nasal Epinephrine (Neffy)')} options={['1 mg', '2 mg']} span={4} />
+            <InputFieldCell type="date" label={t("Date")} span={2} />
+            <InputFieldCell label={t("Time")} span={2} />
+            <Cell span={4}>
+                <RadiosField labelDisplay="block" inlineOptions={false} label={t('Where was Epinephrine Administered?')} options={[
+                    'Right thigh',
+                    'Left thigh',
+                    'Right nostril',
+                    'Left nostril',
+                ]} span={4} />
+            </Cell>
+            <InputFieldCell label={t("Administered by")} span={4} />
+            <InputFieldCell label={t("Signature")} span={4} />
+        </Grid>
+    </FieldSet>
+</FormElement>

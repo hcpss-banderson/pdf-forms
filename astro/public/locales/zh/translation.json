@@ -1,0 +1,26 @@
+{
+  "4701-000004": {
+    "name_trip": "行程名称",
+    "date": "日期",
+    "student_info": "学生信息",
+    "participant_name": "参与者姓名",
+    "birth_date": "出生日期",
+    "school": "学校",
+    "grade": "年级",
+    "address": "地址",
+    "passport_number": "护照号码",
+    "phone": "电话",
+    "email": "电子邮件",
+    "parent_info": "家长/监护人信息",
+    "parent_name": "家长/监护人姓名",
+    "address_if_different": "地址（如有不同）",
+    "work_phone": "工作电话",
+    "home_phone": "住宅电话",
+    "cell_phone": "手机",
+    "agreement": "我/我们已阅读、理解并同意以上适用于<0>student name</0>及所有参加<1>field trip name</1>活动的HCPSS学生的规定。作为家长/监护人，我/我们理解，我的签名也代表我/我们同意我/我们的学生参加此次活动。",
+    "student_signature": "学生签名",
+    "parent_signature": "家长/监护人签名",
+    "signature1": "签名 1",
+    "signature2": "签名 2"
+  }
+}

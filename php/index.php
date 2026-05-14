@@ -77,9 +77,9 @@ $result = $pdf_reactor->convertAsBinary([
         [
             'content' => '
                 @page {
-                  margin: 0.5in;
-                  size: Letter;
-                  -ro-scale-content: 70%;
+                  margin: 0.25in;
+                  size: letter landscape;
+                  -ro-scale-content: 62%;
                 }
                 form, form input, form select, form textarea {
                   -ro-pdf-format: pdf;

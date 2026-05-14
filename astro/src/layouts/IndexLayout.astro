@@ -1,0 +1,57 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { frontmatter } = Astro.props;
+import policyUrl from "../../utils/policyUrl.ts";
+import PageHeader from "../components/PageHeader.astro";
+import PageFooter from "../components/PageFooter.astro";
+import PolicyReference from "../components/PolicyReference.astro";
+import Grid from "../components/layout/grid/Grid.astro";
+import Cell from "../components/layout/grid/Cell.astro";
+import * as fs from 'fs';
+import {languages} from "../i18n/ui.ts";
+
+const translations = {};
+for (const [key, value] of Object.entries(languages)) {
+    const path = frontmatter.file.replace("/index.mdx", "/" + key + ".mdx")
+    if (fs.existsSync(path)) {
+        translations[key] = await import(path);
+    }
+}
+---
+<html lang={lang}>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{frontmatter.title}</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+    </head>
+    <body>
+        <PageHeader title={frontmatter.title || frontmatter.form_id} />
+        <main>
+            <Grid>
+                <Cell span={6}>
+                    <ul>
+                    {Object.entries(translations).map(([lang, translation]) => (
+                        <li><a href={translation.url}>{translation.frontmatter.title}</a></li>
+                    ))}
+                    </ul>
+                </Cell>
+                <Cell span={6}>
+                    <p>
+                        <strong>Form ID:</strong> {frontmatter.form_id}<br>
+                        <strong>Version:</strong> {frontmatter.form_version}<br>
+                        <strong>Person of Contact:</strong> {frontmatter.poc && <span>{frontmatter.poc.name} ({frontmatter.poc.email}))</span>}<br>
+                        <strong>Tags:</strong> {frontmatter.tags && frontmatter.tags.join(", ")}<br>
+                        <strong>Related Policies:</strong> {frontmatter.policy_references.join(", ")}
+                    </p>
+                </Cell>
+            </Grid>
+            <slot />
+        </main>
+        <PageFooter id={frontmatter.form_id} version={frontmatter.form_version} />
+    </body>
+</html>
