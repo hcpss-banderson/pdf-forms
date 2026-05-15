@@ -10,9 +10,43 @@ require_once __DIR__ . '/../PDFreactor.class.php';
 $html_external_url = getenv('HTML_EXTERNAL_ENDPOINT');
 $html_internal_url = getenv('HTML_INTERNAL_ENDPOINT');
 $pdf_reactor_endpoint = getenv('PDF_REACTOR_ENDPOINT');
+$data = json_decode(file_get_contents("$html_internal_url/list.json"), true);
+
+function render_links(string $lang, array $item): void {
+    if (!array_key_exists($lang, $item)) {
+        return;
+    }
+
+    global $html_external_url;
+    global $html_internal_url;
+    global $pdf_reactor_endpoint;
+
+    $params = [
+        'margin' => '0.5in',
+        'size' => 'letter',
+        '-ro-scale-content' => '70%',
+    ];
+    if (!empty($item['index']['frontmatter']['page_styles'])) {
+        foreach ($item['index']['frontmatter']['page_styles'] as $style => $value) {
+            $params[$style] = $value;
+        }
+    }
+    if (!empty($item[$lang]['frontmatter']['page_styles'])) {
+        foreach ($item[$lang]['frontmatter']['page_styles'] as $style => $value) {
+            $params[$style] = $value;
+        }
+    }
+    ?>
+        <a href="<?= $html_external_url . $item[$lang]['url'] ?>">
+            HTML
+        </a> |
+        <a href="/?<?= http_build_query(['form' => $html_internal_url . $item[$lang]['url'], 'params' => $params]) ?>">
+            PDF
+        </a>
+    <?php
+}
 
 if (empty($_GET['form'])) {
-    $data = json_decode(file_get_contents("$html_internal_url/list.json"), true);
     ?>
     <!doctype html>
     <html lang="en">
@@ -28,23 +62,22 @@ if (empty($_GET['form'])) {
                     <th scope="col">Form ID</th>
                     <th scope="col">Version</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Links</th>
+                    <th scope="col">English</th>
+                    <th scope="col">Spanish</th>
+                    <th scope="col">Korean</th>
+                    <th scope="col">Chinese</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($data as $item): ?>
+                <?php foreach ($data as $form_id => $item): ?>
                     <tr>
-                        <td><?= $item['frontmatter']['form_id'] ?></td>
-                        <td><?= $item['frontmatter']['form_version'] ?></td>
-                        <td><?= $item['frontmatter']['title'] ?></td>
-                        <td>
-                            <a href="<?= $html_external_url . $item['url'] ?>">
-                                HTML
-                            </a> |
-                            <a href="/?form=<?= urlencode($html_internal_url . $item['url']) ?>">
-                                PDF
-                            </a>
-                        </td>
+                        <td><?= $form_id ?></td>
+                        <td><?= $item['index']['frontmatter']['form_version'] ?></td>
+                        <td><?= $item['en']['frontmatter']['title'] ?></td>
+                        <td><?= render_links('en', $item) ?></td>
+                        <td><?= render_links('es', $item) ?></td>
+                        <td><?= render_links('ko', $item) ?></td>
+                        <td><?= render_links('zh', $item) ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -56,6 +89,7 @@ if (empty($_GET['form'])) {
 }
 
 $form = $_GET['form'];
+$parms = $_GET['params'];
 $pdf_reactor = new PDFreactor($pdf_reactor_endpoint);
 $result = $pdf_reactor->convertAsBinary([
     'addTags' => TRUE,
@@ -76,11 +110,11 @@ $result = $pdf_reactor->convertAsBinary([
     "userStyleSheets" => [
         [
             'content' => '
-                @page {
-                  margin: 0.25in;
-                  size: letter landscape;
-                  -ro-scale-content: 62%;
-                }
+                @page {' .
+                    array_reduce(array_keys($parms), function ($carry, $key) use ($parms) {
+                        return $carry . "$key: {$parms[$key]};";
+                    }, '')
+                    . '}
                 form, form input, form select, form textarea {
                   -ro-pdf-format: pdf;
                 }
