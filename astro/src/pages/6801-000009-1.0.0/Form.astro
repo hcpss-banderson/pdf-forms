@@ -1,0 +1,72 @@
+---
+import FormElement from "../../components/FormElement.astro";
+import Grid from "../../components/layout/grid/Grid.astro";
+import InputFieldCell from "../../components/form/fields/InputFieldCell.astro";
+import RadiosFieldCell from "../../components/form/fields/RadiosFieldCell.astro";
+import RadiosField from "../../components/form/fields/RadiosField.astro";
+import CheckboxesField from "../../components/form/fields/CheckboxesField.astro";
+import CheckboxField from "../../components/form/fields/CheckboxField.astro";
+import SchoolSelectFieldCell from "../../components/form/fields/SchoolSelectFieldCell.astro";
+import GradeSelectFieldCell from "../../components/form/fields/GradeSelectFieldCell.astro";
+import Heading from "../../components/Heading.astro";
+import Section from "../../components/layout/Section.astro";
+import Break from "../../components/layout/Break.astro";
+import Cell from "../../components/layout/grid/Cell.astro";
+import FieldSet from "../../components/form/fields/FieldSet.astro";
+import InputField from "../../components/form/fields/InputField.astro";
+import TextAreaField from "../../components/form/fields/TextAreaField.astro";
+import ReadonlySection from "../../components/ReadonlySection.astro";
+import Trans from "../../components/Trans.astro";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+import { ui } from './ui.ts'
+const t = useTranslations(lang, ui);
+---
+<FormElement>
+    <Grid>
+        <InputFieldCell labelDisplay="block" label={t("Full Name of Student")} name="students_name" span={4} />
+        <InputFieldCell labelDisplay="block" label={t("Parent/Guardian’s Name")} name="parent_name1" span={4} />
+        <InputFieldCell labelDisplay="block" label={t("Contact #")} name="contact_number1" span={4} />
+        <InputFieldCell labelDisplay="block" label={t("Home Address")} name="home_address" span={4} />
+        <InputFieldCell labelDisplay="block" label={t("Parent/Guardian’s Name")} name="parent_name2" span={4} />
+        <InputFieldCell labelDisplay="block" label={t("Contact #")} name="contact_number2" span={4} />
+        <InputFieldCell labelDisplay="block" label={t("City")} name="city" span={2} />
+        <InputFieldCell labelDisplay="block" label={t("State")} name="state" span={2} />
+        <InputFieldCell labelDisplay="block" label={t("Zip Code")} name="zip" span={2} />
+        <InputFieldCell labelDisplay="block" label={t("Name of School")} name="school" span={4} />
+        <InputFieldCell labelDisplay="block" label={t("Grade")} name="grade" span={2} />
+    </Grid>
+
+
+    <FieldSet>
+        <Heading level={3}>{t("Assigned Schedule")}</Heading>
+        <Grid>
+            <InputFieldCell label={t("Regular Bus Stop Location")} name="regular_stop" span={8} />
+            <InputFieldCell label={t("Bus Number")} name="bus_number" span={4} />
+        </Grid>
+        <CheckboxesField name="assigned_pickup" label={t("Pick Up")} options={["Daily", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]} />
+        <CheckboxesField name="assigned_drop_off" label={t("Drop Off")} options={["Daily", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]} />
+    </FieldSet>
+
+    <FieldSet>
+        <Heading level={3}>{t("Requested Schedule")}</Heading>
+        <Grid>
+            <InputFieldCell label={t("Requested Bus Stop Location")} name="requested_stop" span={8} />
+            <InputFieldCell label={t("Bus Number")} name="requested_bus_number" span={4} />
+        </Grid>
+        <CheckboxesField name="requested_assigned_pickup" label={t("Pick Up")} options={["Daily", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]} />
+        <CheckboxesField name="requested_assigned_drop_off" label={t("Drop Off")} options={["Daily", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]} />
+    </FieldSet>
+
+    <Grid>
+        <InputFieldCell label={t("Signature of Parent/Guardian:")} name="signature" span={8} />
+        <InputFieldCell label={t("Date")} name="date" span={4} />
+    </Grid>
+
+    <ReadonlySection>
+        <Heading level={3}>{t("For School Office Use Only")}</Heading>
+        <CheckboxField name="confirmed_ost" label={t("Confirmed with OST Area Manager that there is space available on the alternate bus, in writing.")} />
+        <RadiosField name="result" label={t("Result: ")} options={["Approved", "Denied"]} />
+        <InputField name="admin_signature" label={t("School Administrator Signature")} />
+    </ReadonlySection>
+</FormElement>

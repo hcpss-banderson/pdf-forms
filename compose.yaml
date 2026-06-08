@@ -1,7 +1,7 @@
 services:
   pdfreactor:
     container_name: forms_pdfreactor
-    image: realobjects/pdfreactor
+    image: realobjects/pdfreactor:12
     volumes:
       - ./config:/ro/config
   astro:
@@ -12,6 +12,7 @@ services:
     working_dir: /app
     ports:
       - "4321:4321"
+      - "6006:6006"
   php:
     container_name: forms_php
     build: php
