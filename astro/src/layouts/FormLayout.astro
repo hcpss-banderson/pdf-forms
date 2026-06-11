@@ -17,6 +17,8 @@ if (fs.existsSync(path)) {
         frontmatter[key] = value;
     }
 }
+const style_path = frontmatter.file.replace(/\/[a-z]{2}\.mdx/, "/style.css")
+console.log(style_path);
 ---
 <html lang={lang}>
     <head>
@@ -26,6 +28,7 @@ if (fs.existsSync(path)) {
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="./style.css">
+        {fs.existsSync(style_path) && <link rel="stylesheet" type="text/css" href={style_path} />}
     </head>
     <body>
         <PageHeader title={frontmatter.title || frontmatter.form_id} subtitle={frontmatter.subtitle} />
